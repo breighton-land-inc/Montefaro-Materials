@@ -29,11 +29,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Nav active highlighting on scroll
+// Smart navbar: hide on scroll down, show on scroll up + active highlighting
+let lastScrollY = window.scrollY;
+const header = document.querySelector('header');
+
 window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    // Navbar hide/show logic (universal for desktop/mobile)
+    if (currentScrollY > 50) {  // Threshold to avoid top flicker
+        if (currentScrollY > lastScrollY) {
+            // Scrolling down
+            header.classList.add('nav-hidden');
+        } else {
+            // Scrolling up
+            header.classList.remove('nav-hidden');
+        }
+    } else {
+        // Always show at top
+        header.classList.remove('nav-hidden');
+    }
+    lastScrollY = currentScrollY;
+    
+    // Active nav highlighting logic
     let current = '';
     const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinksAll = document.querySelectorAll('.nav-links a');
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -43,7 +64,7 @@ window.addEventListener('scroll', () => {
         }
     });
 
-    navLinks.forEach(link => {
+    navLinksAll.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
@@ -70,3 +91,4 @@ document.querySelectorAll('.download-btn').forEach(btn => {
         downloadFile(filename, url);
     });
 });
+

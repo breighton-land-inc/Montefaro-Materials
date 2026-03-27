@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -20,15 +19,24 @@ header {
     backdrop-filter: blur(10px);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+header.nav-hidden {
+    transform: translateY(-100%);
 }
 
 nav {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:-10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.9rem 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  
 }
 
 .nav-logo img {
@@ -48,7 +56,9 @@ nav {
     color: #333;
     font-weight: 500;
     transition: color 0.3s;
-    font-size: 150%;
+    font-size: 130%;
+    font-weight: BOLD !important;
+    
 }
 
 .nav-links a:hover {
@@ -95,9 +105,13 @@ main {
 }
 
 .home {
-    background: url('./logoAndPics/background.jpg') no-repeat center center/cover;
+    background: url('../logoAndPics/background.jpg') no-repeat center center/cover;
     color: white;
     text-align: center;
+
+    height: 20rem;
+    display: flex;
+    position: relative;
 }
 
 .home-content {
@@ -127,17 +141,20 @@ main {
 }
 
 .section h2 {
-    text-align: center;
-    font-size: 3rem;
+    text-align: left;
+    font-size: 2rem;
     color: #333;
+    margin-top: 2rem;
+     
 }
+
 
 .card {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin:0 auto;
     background: white;
-    padding: 3rem 7rem;
+    padding: 2rem 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
@@ -183,7 +200,7 @@ main {
 }
 
 .filename {
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
     font-weight: bold;
     color: #333;
     margin-bottom: 0.5rem !important;
@@ -213,6 +230,41 @@ main {
     box-shadow: 0 8px 25px rgba(0,123,255,0.4);
 }
 
+
+@media (max-width: 768px) {
+    .price-table {
+        display: block;
+        font-size: 0.85rem;
+    }
+    
+    .price-table thead {
+        display: none;
+    }
+    
+    .price-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    .price-table td {
+        display: block;
+        text-align: right;
+        padding: 0.3rem 0;
+        border: none;
+        position: relative;
+    }
+    
+    .price-table td:before {
+        content: attr(data-label) ": ";
+        float: left;
+        font-weight: bold;
+        color: #555;
+    }
+}
+
 footer {
     background: #333;
     color: white;
@@ -224,16 +276,17 @@ footer {
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
-        top: 45px;
+        top: 80px;
         Right: -50%;
         height: calc(100vh - 45px);
-        background: rgba(255,255,255,0.98);
+        background: rgba(255,255,255,0.90);
         flex-direction: column;
         justify-content: start;
         padding: 0 2rem;
-        padding-top: 2rem;
+        padding-top: 3rem;
         transition: right 0.3s;
         font-size: .9rem;
+        font-weight: BOLD !important;
     }
     .nav-links.active {
         Right: 0;
@@ -264,7 +317,8 @@ footer {
     }
 
     #computation, #presentation, #price {
-        padding: 1rem;
+        padding: 1rem ;
+        padding-right: 4rem; 
     }
 
     #computation h2, #presentation h2, #price h2 {
@@ -273,9 +327,10 @@ footer {
     }
 
     .card {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem !important;
         width: 100%;
-        max-width: 400px;
+        max-width: none;
+        margin: 0 auto;
     }
 
     .pdf-nav {
@@ -287,6 +342,11 @@ footer {
         height: 40px;
         font-size: 18px;
     }
+
+   .home{
+    background-position-y: 100px ;
+    margin-top: -120px;
+   }
 }
 
 @media (max-width: 480px) {
@@ -296,7 +356,7 @@ footer {
 
     .nav-logo img {
         height: 70px;
-        padding: 10px;
+        padding-top: 15px;
     }
 }
 
