@@ -1,0 +1,258 @@
+/* --- Global Reset & Variables --- */
+:root {
+  --primary: rgb(255, 155, 75);
+  --primary-hover: #f27c22;
+  --text-main: #2d3436;
+  --bg-gradient: linear-gradient(135deg, #fffcf5 0%, #f7e8d4 100%);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: var(--bg-gradient);
+  overflow-x: hidden;
+}
+
+/* --- Navigation --- */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s;
+}
+
+header.nav-hidden {
+  transform: translateY(-110%);
+}
+
+nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.nav-logo img {
+  height: 65px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary);
+}
+
+/* --- Hero Section --- */
+.home {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("logoAndPics/background.jpg") no-repeat center center/cover;
+  height: 50rem;
+  border-radius: 0 0 60px 60px;
+  display: flex;
+  align-items: center;
+}
+
+.home-content {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 4rem 3rem;
+  border-radius: 30px;
+  max-width: 750px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.home-content h1 {
+  font-size: 4.5rem;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Cards & Buttons --- */
+.section {
+  padding: 8rem 2rem;
+}
+
+.section h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.card {
+  background: #ffffff;
+  padding: 4rem 2rem;
+  border-radius: 35px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  text-align: center;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+}
+
+.filename {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.priceDate {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #636e72;
+}
+
+.preview-btn,
+.download-btn {
+  display: inline-block;
+  padding: 1.1rem 2.5rem;
+  border-radius: 18px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+  margin: 0.6rem;
+  cursor: pointer;
+  border: none;
+}
+
+.preview-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.download-btn {
+  background: #f1f2f6;
+  color: var(--text-main);
+}
+
+/* --- MODAL OVERLAY --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2001;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 3vh auto;
+  border-radius: 35px;
+  width: 94%;
+  max-width: 1200px;
+  height: 94vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  width: 45px;
+  height: 45px;
+  background: #f1f2f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#preview-container {
+  width: 100%;
+  height: 100%;
+}
+
+#preview-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Burger Menu */
+.burger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+}
+.burger div {
+  width: 30px;
+  height: 3px;
+  background: #333;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100vh;
+    background: #fff;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+  }
+  .nav-links.active {
+    right: 0;
+  }
+  .home-content h1 {
+    font-size: 3rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
