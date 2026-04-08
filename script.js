@@ -85,10 +85,36 @@ function previewFile(event, url) {
     if (container) {
         container.innerHTML = ''; 
 
-        // Create iframe for PDF preview
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        container.appendChild(iframe);
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile && url.toLowerCase().endsWith('.pdf') && url.startsWith('http')) {
+            // Use Google Docs viewer for mobile PDFs hosted online
+            container.style.overflow = 'auto';
+            container.style.WebkitOverflowScrolling = 'touch';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            container.appendChild(iframe);
+        } else if (url.toLowerCase().endsWith('.pdf')) {
+            // Use <embed> for desktop or local offline PDFs
+            const embed = document.createElement('embed');
+            embed.src = url;
+            embed.type = 'application/pdf';
+            embed.style.width = '100%';
+            embed.style.height = '100%';
+            container.appendChild(embed);
+        } else {
+             // Non-PDF files fallback
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            container.appendChild(iframe);
+        }
     }
 }
 
